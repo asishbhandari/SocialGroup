@@ -54,10 +54,10 @@ app.use('/verifiedUser',userRoutes)
 app.use('/posts', postRoutes)
 
 //  below code is used to include static build folder of frontend 
-app.use(express.static(path.join(__dirname, "./client/dist")))
-app.get("*", function(req, res){
-    res.sendFile(path.join(__dirname, "./client/dist/index.html"));
-});
+// app.use(express.static(path.join(__dirname, "./client/dist")))
+// app.get("*", function(req, res){
+//     res.sendFile(path.join(__dirname, "./client/dist/index.html"));
+// });
 
 // mongoos setup
 const PORT = process.env.PORT || 3001;
