@@ -30,6 +30,7 @@ app.use(bodyParser.urlencoded({limit: '30mb', extended: true}));
 app.use(cors()); // Cors enables your express application access control to allow restricted resources from being accessed from external domains.
 app.use("/assets", express.static(path.join(__dirname, './public/assets'))); // setting up local storage
 
+
 //  file storage
 const storage= multer.diskStorage({
     destination: function(req, file, cb){
@@ -51,6 +52,12 @@ app.post('/post', verifyToken, upload.single('picture'), createPost)
 app.post('/authentication/login', login);
 app.use('/verifiedUser',userRoutes)
 app.use('/posts', postRoutes)
+
+//  below code is used to include static build folder of frontend 
+app.use(express.static(path.join(__dirname, "./client/dist")))
+app.get("*", function(req, res){
+    res.sendFile(path.join(__dirname, "./client/dist/index.html"));
+});
 
 // mongoos setup
 const PORT = process.env.PORT || 3001;
