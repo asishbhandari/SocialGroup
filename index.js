@@ -53,7 +53,7 @@ app.use('/verifiedUser',userRoutes)
 app.use('/posts', postRoutes)
 
 // mongoos setup
-const PORT = 3001;
+const PORT = process.env.PORT || 3001;
 
 // mongoose.connect(process.env.MONGO_URL).then( ()=> console.log(`server port: ${PORT}`)).catch((error) => console.log(`${error} did not connect`))
 // app.listen(PORT, ()=> console.log(`server port: ${PORT}`));
