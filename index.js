@@ -16,8 +16,8 @@ import {createPost} from './controllers/userPostRoutes/posts.js';
 import { verifyToken } from './middleware/verifyAuth.js';
 
 //  configurations
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+// const __filename = fileURLToPath(import.meta.url);
+// const __dirname = path.dirname(__filename);
 dotenv.config();
 const app= express();
 app.use(express.json());
@@ -39,7 +39,8 @@ const storage= multer.diskStorage({
     filename: function(req, file, cb){
         cb(null, file.originalname);
     }
-})
+});
+
 const upload =multer({storage: storage})
 
 
@@ -54,10 +55,10 @@ app.use('/verifiedUser',userRoutes)
 app.use('/posts', postRoutes)
 
 //  below code is used to include static build folder of frontend 
-// app.use(express.static(path.join(__dirname, "./client/dist")))
-// app.get("*", function(req, res){
-//     res.sendFile(path.join(__dirname, "./client/dist/index.html"));
-// });
+app.use(express.static(path.join(__dirname, "./client/dist")))
+app.get("*", function(req, res){
+    res.sendFile(path.join(__dirname, "./client/dist/index.html"));
+});
 
 // mongoos setup
 const PORT = process.env.PORT || 3001;
